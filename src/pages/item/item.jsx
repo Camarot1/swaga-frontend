@@ -12,7 +12,7 @@ export default function ItemContent() {
     const [selectedEdition, setSelectedEdition] = useState("0");
 
     useEffect(() => {
-        fetch(`http://213.171.25.46:3000/games/${id}`)
+        fetch(`${process.env.REACT_APP_URL}/games/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 setGame(data);

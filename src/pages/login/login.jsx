@@ -14,7 +14,7 @@ export default function Login() {
         setError('');
 
         try {
-            const response = await fetch('http://213.171.25.46:3000/users/login', {
+            const response = await fetch(`${process.env.REACT_APP_URL}/users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export default function Login() {
                             required
                         />
                         <button type="submit" className="form__button">Вход</button>
-                        <Link to="/register">Регистрация</Link>
+                        <div className="form__register"><Link to="/register">Регистрация</Link></div>
                     </form>
                 </div>
             </main>

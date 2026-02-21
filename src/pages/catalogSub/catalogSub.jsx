@@ -7,7 +7,7 @@ export default function CatalogSubContent() {
   const [cards, setCards] = useState([])
 
   useEffect(() => {
-    fetch("http://213.171.25.46:3000/subs")
+    fetch(`${process.env.REACT_APP_URL}/subs`)
       .then((res) => res.json())
       .then((data) => setCards(data))
       .catch((err) => console.error("Ошибка загрузки:", err))

@@ -14,7 +14,7 @@ export default function AdminUsers() {
 
     const fetchUsers = async () => {
         try {
-            const response = await fetch('http://213.171.25.46:3000/users');
+            const response = await fetch(`${process.env.REACT_APP_URL}/users`);
             const data = await response.json();
             setUsers(data);
             setLoading(false);
@@ -36,7 +36,7 @@ export default function AdminUsers() {
         }
 
         try {
-            const response = await fetch(`http://213.171.25.46:3000/users/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_URL}/users/${id}`, {
                 method: 'DELETE',
             });
 

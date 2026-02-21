@@ -25,7 +25,6 @@ export default function Register() {
         setError('');
         setLoading(true);
 
-        // Базовая валидация
         if (!formData.login || !formData.password || !formData.confirmPassword) {
             setError('Все поля обязательны для заполнения');
             setLoading(false);
@@ -45,7 +44,7 @@ export default function Register() {
         }
 
         try {
-            const response = await fetch('http://213.171.25.46:3000/users/register', {
+            const response = await fetch(`${process.env.REACT_APP_URL}/users/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -124,7 +123,7 @@ export default function Register() {
                         </button>
 
                         <div className="form__login-link">
-                            Уже есть аккаунт? <Link to="/login">Войти</Link>
+                            Уже есть аккаунт? <span className="span"> <Link to="/login">Войти</Link></span>
                         </div>
                     </form>
                 </div>

@@ -6,7 +6,7 @@ export default function CatalogContent() {
   const [cards, setCards] = useState([])
 
   useEffect(() => {
-    fetch("http://213.171.25.46:3000/games")
+    fetch(`${process.env.REACT_APP_URL}/games`)
       .then((res) => res.json())
       .then((data) => setCards(data))
       .catch((err) => console.error("Ошибка загрузки:", err))

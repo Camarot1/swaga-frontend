@@ -17,7 +17,7 @@ export default function AdminGames() {
 
     const fetchGames = async () => {
         try {
-            const response = await fetch('http://213.171.25.46:3000/games');
+            const response = await fetch(`${process.env.REACT_APP_URL}/games`);
             const data = await response.json();
             setGames(data);
             setLoading(false);
@@ -44,7 +44,7 @@ export default function AdminGames() {
         setMessage('');
 
         try {
-            const response = await fetch(`http://213.171.25.46:3000/games/save-game/${steamId}`, {
+            const response = await fetch(`${process.env.REACT_APP_URL}/games/save-game/${steamId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ export default function AdminGames() {
         }
 
         try {
-            const response = await fetch(`http://213.171.25.46:3000/games/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_URL}/games/${id}`, {
                 method: 'DELETE',
             });
 

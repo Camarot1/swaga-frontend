@@ -60,4 +60,19 @@ a {
         font-size: 25px;
         color: black;
     }
+    .form__login-link{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color:white;
+        font-weight: 20px;
+        .link{
+            color: white;
+            font-weight: 25px;
+        }
+    }
+    .error-message{
+        color:white;
+        font-size:25px;
+    }
 }

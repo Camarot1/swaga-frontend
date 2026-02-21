@@ -26,7 +26,7 @@ export default function OrderPage() {
         setLoading(true);
 
         try {
-            const response = await fetch('http://213.171.25.46:3000/order', {
+            const response = await fetch(`${process.env.REACT_APP_URL}/order`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

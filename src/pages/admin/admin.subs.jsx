@@ -26,7 +26,7 @@ export default function AdminSubs() {
 
     const fetchSubs = async () => {
         try {
-            const response = await fetch('http://213.171.25.46:3000/subs');
+            const response = await fetch(`${process.env.REACT_APP_URL}/subs`);
             const data = await response.json();
             setSubs(data);
             setLoading(false);
@@ -42,7 +42,7 @@ export default function AdminSubs() {
         }
 
         try {
-            const response = await fetch(`http://213.171.25.46:3000/subs/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_URL}/subs/${id}`, {
                 method: 'DELETE',
             });
 
@@ -70,7 +70,7 @@ export default function AdminSubs() {
         e.preventDefault();
         
         try {
-            const response = await fetch('http://213.171.25.46:3000/subs', {
+            const response = await fetch(`${process.env.REACT_APP_URL}/subs`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

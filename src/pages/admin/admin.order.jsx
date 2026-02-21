@@ -4,7 +4,7 @@ export default function AdminOrders() {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        fetch('http://213.171.25.46:3000/order')
+        fetch(`${process.env.REACT_APP_URL}/order`)
             .then(res => res.json())
             .then(data => setOrders(data));
     }, []);
