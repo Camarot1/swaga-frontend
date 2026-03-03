@@ -14,7 +14,10 @@ export default function AdminUsers() {
 
     const fetchUsers = async () => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_URL}/users`);
+            const response = await fetch(`${process.env.REACT_APP_URL}/users`, {
+                method: 'GET',
+                'x-api-key': process.env.REACT_APP_AUTH_KEY
+            });
             const data = await response.json();
             setUsers(data);
             setLoading(false);
@@ -38,6 +41,7 @@ export default function AdminUsers() {
         try {
             const response = await fetch(`${process.env.REACT_APP_URL}/users/${id}`, {
                 method: 'DELETE',
+                'x-api-key': process.env.REACT_APP_AUTH_KEY
             });
 
             if (response.ok) {

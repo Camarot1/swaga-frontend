@@ -17,7 +17,7 @@ export default function Login() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-api-key': process.env.REACT_APP_API_KEY
+                    'x-api-key': process.env.REACT_APP_AUTH_KEY
                 },
                 body: JSON.stringify({ login, password }),
             });
