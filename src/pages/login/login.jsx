@@ -1,4 +1,3 @@
-// pages/login/login.jsx
 import React, { useState } from 'react';
 import './login.scss';
 import { useNavigate, Link } from 'react-router-dom';
@@ -18,6 +17,7 @@ export default function Login() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'x-api-key': process.env.REACT_APP_API_KEY
                 },
                 body: JSON.stringify({ login, password }),
             });
