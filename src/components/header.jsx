@@ -9,7 +9,7 @@ export default function Header() {
         </a>
         <div className="header__navigation">
           <a href="/catalogSub"><button className="navigation__button header__hide big2">Подписки</button></a>
-          <input type="text" className="navigation__search header__hide" placeholder="поиск по товарам, категориям" />
+          <input type="text" className="navigation__search header__hide" placeholder="поиск по товарам" />
           <a href="/catalog"><button className="navigation__button header__hide big">Игры</button></a>
           <a href="/warning"><button className="navigation__button">Профиль</button></a>
         </div>

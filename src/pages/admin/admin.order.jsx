@@ -4,7 +4,12 @@ export default function AdminOrders() {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/order`)
+        fetch(`${process.env.REACT_APP_URL}/order`, {
+            method: 'GET',
+            headers: {
+                'x-api-key': process.env.REACT_APP_AUTH_KEY
+            }
+        })
             .then(res => res.json())
             .then(data => setOrders(data));
     }, []);
@@ -13,9 +18,9 @@ export default function AdminOrders() {
         <div>
             <div className="page-header">
                 <Link to="/admin">
-                <button className="back-btn">
-                    Назад в админку
-                </button>
+                    <button className="back-btn">
+                        Назад в админку
+                    </button>
                 </Link>
             </div>
             <h2>Заказы ({orders.length})</h2>

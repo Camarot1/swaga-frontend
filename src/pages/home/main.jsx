@@ -44,7 +44,7 @@ export default function MainContent() {
             </div>
           </div>
           <div className="main__convert">
-            <img className="convert__img" src="/img/steampopol.svg" alt="" />
+            <img className="convert__img" src="/img/steam.png" alt="" />
             <div className="convert__block">
               <p className="convert__title">Пополнение STEAM</p>
               <div className="convert__block">

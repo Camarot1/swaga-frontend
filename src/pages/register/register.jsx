@@ -37,8 +37,8 @@ export default function Register() {
             return;
         }
 
-        if (formData.password.length < 3) {
-            setError('Пароль должен содержать минимум 3 символа');
+        if (formData.password.length < 8) {
+            setError('Пароль должен содержать минимум 8 символа');
             setLoading(false);
             return;
         }
@@ -48,6 +48,7 @@ export default function Register() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'x-api-key': process.env.REACT_APP_AUTH_KEY
                 },
                 body: JSON.stringify(formData),
             });

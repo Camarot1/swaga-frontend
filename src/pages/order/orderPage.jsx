@@ -30,6 +30,7 @@ export default function OrderPage() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'x-api-key': process.env.REACT_APP_AUTH_KEY
                 },
                 body: JSON.stringify({
                     email: email,
