@@ -41,7 +41,7 @@ export default function SubContent() {
                     <div className="main__info">
                         <img src="../img/sub__img-big.svg" className="info__img" alt="" />
                         <div className="info__content">
-                            <div className="content__title">Купить подписку <span className="content">{sub?.title}</span></div>
+                            <div className="content__title">Купить подписку <span className="content">{sub?.title} {sub?.id}</span></div>
                             <div className="content__conditions">
                                 {sub?.need_vpn !== null && (
                                     <p className="condition">
@@ -80,10 +80,10 @@ export default function SubContent() {
                             className="content__button"
                             onClick={() => navigate('/orderPage', {
                                 state: {
-                                    type: 'subscription',
+                                    type: 'sub',
                                     title: sub?.title,
-                                    price: sub?.priceNew + '₽',
-                                    subId: sub?.id
+                                    price: sub?.priceNew,
+                                    id: sub?.id
                                 }
                             })}
                         >

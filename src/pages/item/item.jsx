@@ -132,8 +132,8 @@ export default function ItemContent() {
                                                 state: {
                                                     type: 'game',
                                                     title: game.name,
-                                                    price: currentPrice + '₽',
-                                                    gameId: game.id
+                                                    price: currentPrice,
+                                                    id: game.id
                                                 }
                                             })}
                                         >

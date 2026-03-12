@@ -30,7 +30,7 @@ export default function DonateContent() {
                 type: 'donate',
                 title: `Пополнение Steam на ${amount}${currency}`,
                 price: finalAmount,
-                steamLogin: steamLogin
+                steamLogin: steamLogin,
             }
         });
     };

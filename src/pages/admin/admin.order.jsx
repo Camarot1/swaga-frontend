@@ -31,6 +31,8 @@ export default function AdminOrders() {
                         <th>Email</th>
                         <th>Логин</th>
                         <th>Цена</th>
+                        <th>Категория</th>
+                        <th>ID товара</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +42,8 @@ export default function AdminOrders() {
                             <td>{order.email}</td>
                             <td>{order.login || '-'}</td>
                             <td>{order.price}₽</td>
+                            <td>{order.type}</td>
+                            <td>{order.idProduct}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -33,9 +33,12 @@ export default function OrderPage() {
                     'x-api-key': process.env.REACT_APP_AUTH_KEY
                 },
                 body: JSON.stringify({
+                    title: orderData.title,
                     email: email,
                     login: login,
-                    price: orderData.price
+                    type: orderData.type,
+                    price: orderData.price,
+                    idProduct: orderData.id
                 }),
             });
 
@@ -99,6 +102,7 @@ export default function OrderPage() {
                             />
                         </div>
                     )}
+
 
                     <div className="order-total">
                         Итого: {orderData.price}
