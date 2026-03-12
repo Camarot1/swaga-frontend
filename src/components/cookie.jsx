@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './cookie.css';
 
-const Сookie = () => {
+const Cookie = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -33,4 +33,4 @@ const Сookie = () => {
   );
 };
 
-export default Сookie;
+export default Cookie;

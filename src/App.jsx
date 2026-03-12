@@ -14,7 +14,7 @@ import Register from './pages/register/register.jsx'
 import Profile from './pages/profile/profile.jsx'
 import OrderPage from './pages/order/orderPage.jsx'
 import NotFound from './pages/notFound/notFound.jsx'
-import Сookie from './components/cookie';
+import Cookie from './components/cookie.jsx';
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
@@ -49,7 +49,7 @@ function App() {
             <Route path="/admin/order" element={<AdminOrders />}></Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <Сookie/>
+          <Cookie />
           <Footer />
         </main>
       </div>
