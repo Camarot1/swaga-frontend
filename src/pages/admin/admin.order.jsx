@@ -33,6 +33,7 @@ export default function AdminOrders() {
                         <th>Цена</th>
                         <th>Категория</th>
                         <th>ID товара</th>
+                        <th>Название товара</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +45,7 @@ export default function AdminOrders() {
                             <td>{order.price}₽</td>
                             <td>{order.type}</td>
                             <td>{order.idProduct}</td>
+                            <td>{order.title}</td>
                         </tr>
                     ))}
                 </tbody>
