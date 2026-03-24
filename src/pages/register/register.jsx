@@ -21,54 +21,34 @@ export default function Register() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
-        setLoading(true);
+    e.preventDefault();
+    setError('');
+    setLoading(true);
 
-        if (!formData.login || !formData.password || !formData.confirmPassword) {
-            setError('Все поля обязательны для заполнения');
-            setLoading(false);
-            return;
+    try {
+        const response = await fetch(`${process.env.REACT_APP_URL}/users/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert('Регистрация успешна');
+            navigate('/login');
+        } else {
+            setError(data.message);
         }
+    } catch (error) {
+        setError('Ошибка сервера');
+    } finally {
+        setLoading(false);
+    }
+};
 
-        if (formData.password !== formData.confirmPassword) {
-            setError('Пароли не совпадают');
-            setLoading(false);
-            return;
-        }
-
-        if (formData.password.length < 8) {
-            setError('Пароль должен содержать минимум 8 символа');
-            setLoading(false);
-            return;
-        }
-
-        try {
-            const response = await fetch(`${process.env.REACT_APP_URL}/users/register`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': process.env.REACT_APP_AUTH_KEY
-                },
-                body: JSON.stringify(formData),
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                localStorage.setItem('user', JSON.stringify(data.user));
-                alert('Регистрация прошла успешно!');
-                navigate('/profile');
-            } else {
-                setError(data.message);
-            }
-        } catch (error) {
-            console.error('Ошибка при регистрации:', error);
-            setError('Ошибка соединения с сервером');
-        } finally {
-            setLoading(false);
-        }
-    };
 
     return (
         <div className="register-page">

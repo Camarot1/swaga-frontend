@@ -9,31 +9,31 @@ export default function Login() {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
+    e.preventDefault();
+    setError('');
 
-        try {
-            const response = await fetch(`${process.env.REACT_APP_URL}/users/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': process.env.REACT_APP_AUTH_KEY
-                },
-                body: JSON.stringify({ login, password }),
-            });
+    try {
+        const response = await fetch(`${process.env.REACT_APP_URL}/users/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ login, password }),
+        });
 
-            const data = await response.json();
+        const data = await response.json();
 
-            if (data.success) {
-                localStorage.setItem('user', JSON.stringify(data.user));
-                navigate(data.redirectTo);
-            } else {
-                setError(data.message);
-            }
-        } catch (error) {
-            setError('Ошибка соединения с сервером');
+        if (data.success) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            navigate(data.user.isAdmin ? '/admin' : '/profile');
+        } else {
+            setError(data.message);
         }
-    };
+    } catch (error) {
+        setError('Ошибка соединения с сервером');
+    }
+};
 
     return (
         <div className="login-page">

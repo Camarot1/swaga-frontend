@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { getAuthHeaders } from '../api';
 import "./orderPage.scss"
 
 export default function OrderPage() {
@@ -21,6 +22,7 @@ export default function OrderPage() {
         }
     }, [location, navigate]);
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -28,10 +30,7 @@ export default function OrderPage() {
         try {
             const response = await fetch(`${process.env.REACT_APP_URL}/order`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-api-key': process.env.REACT_APP_AUTH_KEY
-                },
+                headers: getAuthHeaders(),
                 body: JSON.stringify({
                     title: orderData.title,
                     email: email,
@@ -45,14 +44,14 @@ export default function OrderPage() {
             const result = await response.json();
 
             if (response.ok) {
-                alert('Заказ успешно оформлен! Информация отправлена на вашу почту.');
+                alert('Заказ оформлен!');
                 navigate('/');
             } else {
                 alert(`Ошибка: ${result.error}`);
             }
+
         } catch (error) {
-            console.error('Error creating order:', error);
-            alert('Ошибка соединения с сервером');
+            alert('Ошибка соединения');
         } finally {
             setLoading(false);
         }
@@ -68,7 +67,7 @@ export default function OrderPage() {
                 <button className="back-btn" onClick={() => navigate(-1)}>
                     ← Назад
                 </button>
-                
+
                 <h1>Оформление заказа</h1>
 
                 <div className="order-item">
@@ -108,8 +107,8 @@ export default function OrderPage() {
                         Итого: {orderData.price}
                     </div>
 
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         className="submit-btn"
                         disabled={loading}
                     >
