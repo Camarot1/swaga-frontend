@@ -11,7 +11,7 @@ export default function Header() {
           <a href="/catalogSub"><button className="navigation__button header__hide big2">Подписки</button></a>
           <input type="text" className="navigation__search header__hide" placeholder="поиск по товарам" />
           <a href="/catalog"><button className="navigation__button header__hide big">Игры</button></a>
-          <a href="/login"><button className="navigation__button">Профиль</button></a>
+          <a href="/profile"><button className="navigation__button">Профиль</button></a>
         </div>
         <div className="header__burger">
           <div className="burger">

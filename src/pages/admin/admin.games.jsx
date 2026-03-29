@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getToken, checkAdmin } from '../auth';
 import './admin.scss';
 
 export default function AdminGames() {
@@ -8,22 +9,30 @@ export default function AdminGames() {
     const [steamId, setSteamId] = useState('');
     const [adding, setAdding] = useState(false);
     const [message, setMessage] = useState('');
+    const [isAdmin, setIsAdmin] = useState(null);
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
-        fetchGames();
-    }, []);
+        const verifyAdmin = async () => {
+            const adminStatus = await checkAdmin();
+            setIsAdmin(adminStatus);
+            if (!adminStatus) {
+                navigate('/profile');
+                return;
+            }
+            fetchGames();
+            setLoading(false);
+        };
+        verifyAdmin();
+    }, [navigate]);
 
     const fetchGames = async () => {
         try {
             const response = await fetch(`${process.env.REACT_APP_URL}/games`);
             const data = await response.json();
             setGames(data);
-            setLoading(false);
         } catch (error) {
             console.error('Error fetching games:', error);
-            setLoading(false);
         }
     };
 
@@ -44,10 +53,12 @@ export default function AdminGames() {
         setMessage('');
 
         try {
+            const token = getToken();
             const response = await fetch(`${process.env.REACT_APP_URL}/games/save-game/${steamId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
             });
 
@@ -56,7 +67,6 @@ export default function AdminGames() {
             if (response.ok) {
                 setMessage(`Игра "${result.gameName}" успешно добавлена!`);
                 setSteamId('');
-                // Обновляем список игр
                 fetchGames();
             } else {
                 setMessage(`Ошибка: ${result.error}`);
@@ -75,8 +85,12 @@ export default function AdminGames() {
         }
 
         try {
+            const token = getToken();
             const response = await fetch(`${process.env.REACT_APP_URL}/games/${id}`, {
                 method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
 
             if (response.ok) {
@@ -91,21 +105,8 @@ export default function AdminGames() {
         }
     };
 
-    // Проверка прав администратора
-    if (!user || user.isAdmin !== 1) {
-        return (
-            <div className="admin-page">
-                <div className="access-denied">
-                    <h1>Доступ запрещен</h1>
-                    <p>Требуются права администратора</p>
-                    <button onClick={() => navigate('/login')}>Войти</button>
-                </div>
-            </div>
-        );
-    }
-
-    if (loading) {
-        return <div>Загрузка игр...</div>;
+    if (loading || isAdmin === null) {
+        return <div>Загрузка...</div>;
     }
 
     return (
@@ -120,7 +121,6 @@ export default function AdminGames() {
                         <p>Всего игр: {games.length}</p>
                     </div>
 
-                    {/* форма добавления игры */}
                     <div className="add-game-form">
                         <h2>Добавить игру из Steam</h2>
                         <form onSubmit={handleAddGame}>

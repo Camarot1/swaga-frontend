@@ -1,25 +1,32 @@
-import React, {useEffect, useState} from 'react'
-import './profile.scss'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getUserFromToken, logout } from '../auth';
+import './profile.scss';
 
 export default function Profile() {
-    const [login, setLogin] = useState('')
+    const navigate = useNavigate();
+    const [login, setLogin] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Получаем данные пользователя из localStorage
-        const userData = localStorage.getItem('user')
-        if (userData) {
-            try {
-                const user = JSON.parse(userData)
-                setLogin(user.login || 'Пользователь')
-            } catch (error) {
-                console.error('Ошибка при парсинге user данных:', error)
-                setLogin('Пользователь')
-            }
-        } else {
-            setLogin('Пользователь')
+        const user = getUserFromToken();
+        if (!user) {
+            logout();
+            navigate('/login');
+            return;
         }
-    }, [])
+        setLogin(user.login);
+        setLoading(false);
+    }, [navigate]);
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
+
+    if (loading) {
+        return <div>Загрузка...</div>;
+    }
 
     return (
         <div className="profile-page">
@@ -29,24 +36,12 @@ export default function Profile() {
                         <p className="text__info">Профиль</p>
                         <p className="text__name">{login}</p>
                     </div>
-
                     <div className="main__order">
                         <div className="order__buttons">
                             <button className="order__button relevant">Активные</button>
                             <button className="order__button finished">Выполнено</button>
                         </div>
-
                         <div className="order__list">
-                            <div className="list__item">
-                                <p className="item__title">Название услуги</p>
-                                <p className="item__money">1000 руб.</p>
-                            </div>
-
-                            <div className="list__item">
-                                <p className="item__title">Название услуги</p>
-                                <p className="item__money">1000 руб.</p>
-                            </div>
-
                             <div className="list__item">
                                 <p className="item__title">Название услуги</p>
                                 <p className="item__money">1000 руб.</p>
@@ -56,5 +51,5 @@ export default function Profile() {
                 </div>
             </main>
         </div>
-    )
+    );
 }

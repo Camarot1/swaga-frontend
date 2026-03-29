@@ -1,28 +1,37 @@
-// pages/admin/admin.page.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { logout, checkAdmin } from '../auth';
+import './admin.scss';
 
 export default function AdminPage() {
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem('user'));
+    const [isAdmin, setIsAdmin] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    // Базовая проверка прав администратора
-    if (!user || user.isAdmin !== 1) {
-        return (
-            <div className="admin-page">
-                <div className="admin-page__access-denied">
-                    <h1>Доступ запрещен</h1>
-                    <p>Требуются права администратора</p>
-                    <button onClick={() => navigate('/login')}>Войти</button>
-                </div>
-            </div>
-        );
-    }
+    useEffect(() => {
+        const verifyAdmin = async () => {
+            const adminStatus = await checkAdmin();
+            setIsAdmin(adminStatus);
+            if (!adminStatus) {
+                navigate('/profile');
+            }
+            setLoading(false);
+        };
+        verifyAdmin();
+    }, [navigate]);
 
     const handleLogout = () => {
-        localStorage.removeItem('user');
+        logout();
         navigate('/login');
     };
+
+    if (loading) {
+        return <div>Загрузка...</div>;
+    }
+
+    if (!isAdmin) {
+        return null;
+    }
 
     return (
         <div className="admin-page">
@@ -31,8 +40,7 @@ export default function AdminPage() {
                     <div className="admin-page__header">
                         <h1 className="admin-page__title">Админ панель</h1>
                         <div className="admin-page__user-info">
-                            <p className="admin-page__user-login">Админ: <strong>{user.login}</strong></p>
-                            <button 
+                            <button
                                 className="admin-page__logout-btn"
                                 onClick={handleLogout}
                             >
@@ -44,27 +52,27 @@ export default function AdminPage() {
                     <div className="admin-page__navigation">
                         <h2 className="admin-page__nav-title">Управление</h2>
                         <div className="admin-page__nav-buttons">
-                            <button 
+                            <button
                                 className="admin-page__nav-btn"
                                 onClick={() => navigate('/admin/subs')}
                             >
                                 Подписки
                             </button>
-                            <button 
+                            <button
                                 className="admin-page__nav-btn"
                                 onClick={() => navigate('/admin/users')}
                             >
                                 Пользователи
                             </button>
-                            <button 
+                            <button
                                 className="admin-page__nav-btn"
                                 onClick={() => navigate('/admin/games')}
                             >
                                 Игры
                             </button>
-                            <button 
+                            <button
                                 className="admin-page__nav-btn"
-                                onClick={()=> navigate('/admin/order')}
+                                onClick={() => navigate('/admin/order')}
                             >
                                 Заказы
                             </button>

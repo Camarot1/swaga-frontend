@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './admin.scss'
+import { getToken, checkAdmin } from '../auth';
+import './admin.scss';
 
 export default function AdminSubs() {
     const [subs, setSubs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(null);
     const navigate = useNavigate();
-    const user = JSON.parse(localStorage.getItem('user'));
 
     const [formData, setFormData] = useState({
         img: '',
@@ -21,8 +22,17 @@ export default function AdminSubs() {
     });
 
     useEffect(() => {
-        fetchSubs();
-    }, []);
+        const verifyAdmin = async () => {
+            const adminStatus = await checkAdmin();
+            setIsAdmin(adminStatus);
+            if (!adminStatus) {
+                navigate('/profile');
+                return;
+            }
+            fetchSubs();
+        };
+        verifyAdmin();
+    }, [navigate]);
 
     const fetchSubs = async () => {
         try {
@@ -42,8 +52,12 @@ export default function AdminSubs() {
         }
 
         try {
+            const token = getToken();
             const response = await fetch(`${process.env.REACT_APP_URL}/subs/${id}`, {
                 method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
             });
 
             if (response.ok) {
@@ -68,12 +82,14 @@ export default function AdminSubs() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         try {
+            const token = getToken();
             const response = await fetch(`${process.env.REACT_APP_URL}/subs`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(formData),
             });
@@ -102,20 +118,8 @@ export default function AdminSubs() {
         }
     };
 
-    if (!user || user.isAdmin !== 1) {
-        return (
-            <div className="admin-page">
-                <div className="access-denied">
-                    <h1>Доступ запрещен</h1>
-                    <p>Требуются права администратора</p>
-                    <button onClick={() => navigate('/login')}>Войти</button>
-                </div>
-            </div>
-        );
-    }
-
-    if (loading) {
-        return <div>Загрузка подписок...</div>;
+    if (loading || isAdmin === null) {
+        return <div>Загрузка...</div>;
     }
 
     return (
@@ -248,6 +252,7 @@ export default function AdminSubs() {
                                     <th className="table__text">Официальная</th>
                                     <th className="table__text">Мгновенная доставка</th>
                                     <th className="table__text">Без передачи аккаунта</th>
+                                    <th className="table__text">Действия</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -257,10 +262,10 @@ export default function AdminSubs() {
                                         <td className="table__text">{sub.title}</td>
                                         <td className="table__text">{sub.priceNew}</td>
                                         <td className="table__text">{sub.time}</td>
-                                        <td className="table__text">{sub.need_vpn ? '1' : '0'}</td>
-                                        <td className="table__text">{sub.is_official ? '1' : '0'}</td>
-                                        <td className="table__text">{sub.instant_delivery ? '1' : '0'}</td>
-                                        <td className="table__text">{sub.no_account_transfer ? '1' : '0'}</td>
+                                        <td className="table__text">{sub.need_vpn ? 'Да' : 'Нет'}</td>
+                                        <td className="table__text">{sub.is_official ? 'Да' : 'Нет'}</td>
+                                        <td className="table__text">{sub.instant_delivery ? 'Да' : 'Нет'}</td>
+                                        <td className="table__text">{sub.no_account_transfer ? 'Да' : 'Нет'}</td>
                                         <td className="table__text">
                                             <button
                                                 className="delete-btn"

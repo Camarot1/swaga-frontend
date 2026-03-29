@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './login.scss';
 import { useNavigate, Link } from 'react-router-dom';
+import { setToken, decodeToken } from '../auth';
 
 export default function Login() {
     const [login, setLogin] = useState('');
@@ -9,31 +10,32 @@ export default function Login() {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
+        e.preventDefault();
+        setError('');
 
-    try {
-        const response = await fetch(`${process.env.REACT_APP_URL}/users/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ login, password }),
-        });
+        try {
+            const response = await fetch(`${process.env.REACT_APP_URL}/users/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ login, password }),
+            });
 
-        const data = await response.json();
+            const data = await response.json();
 
-        if (data.success) {
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
-            navigate(data.user.isAdmin ? '/admin' : '/profile');
-        } else {
-            setError(data.message);
+            if (data.success) {
+                setToken(data.token);
+                const payload = decodeToken(data.token);
+                const isAdmin = payload && payload.isAdmin === 1;
+                navigate(isAdmin ? '/admin' : '/profile');
+            } else {
+                setError(data.message);
+            }
+        } catch (error) {
+            setError('Ошибка соединения с сервером');
         }
-    } catch (error) {
-        setError('Ошибка соединения с сервером');
-    }
-};
+    };
 
     return (
         <div className="login-page">

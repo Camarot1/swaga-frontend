@@ -1,55 +1,92 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { getToken, checkAdmin } from '../auth';
+import './admin.scss';
+
 export default function AdminOrders() {
     const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL}/order`, {
-            method: 'GET',
-            headers: {
-                'x-api-key': process.env.REACT_APP_AUTH_KEY
+        const verifyAdmin = async () => {
+            const adminStatus = await checkAdmin();
+            setIsAdmin(adminStatus);
+            if (!adminStatus) {
+                navigate('/profile');
+                return;
             }
-        })
-            .then(res => res.json())
-            .then(data => setOrders(data));
-    }, []);
+            fetchOrders();
+        };
+        verifyAdmin();
+    }, [navigate]);
+
+    const fetchOrders = async () => {
+        try {
+            const token = getToken();
+            const response = await fetch(`${process.env.REACT_APP_URL}/order`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const data = await response.json();
+            setOrders(data);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+            setLoading(false);
+        }
+    };
+
+    if (loading || isAdmin === null) {
+        return <div>Загрузка...</div>;
+    }
 
     return (
-        <div>
-            <div className="page-header">
-                <Link to="/admin">
-                    <button className="back-btn">
-                        Назад в админку
-                    </button>
-                </Link>
-            </div>
-            <h2>Заказы ({orders.length})</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Email</th>
-                        <th>Логин</th>
-                        <th>Цена</th>
-                        <th>Категория</th>
-                        <th>ID товара</th>
-                        <th>Название товара</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {orders.map(order => (
-                        <tr key={order.id}>
-                            <td>{order.id}</td>
-                            <td>{order.email}</td>
-                            <td>{order.login || '-'}</td>
-                            <td>{order.price}₽</td>
-                            <td>{order.type}</td>
-                            <td>{order.idProduct}</td>
-                            <td>{order.title}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+        <div className="admin-orders-page">
+            <main className="main">
+                <div className="main__container container">
+                    <div className="page-header">
+                        <button className="back-btn" onClick={() => navigate('/admin')}>
+                            Назад в админку
+                        </button>
+                        <h1>Управление заказами</h1>
+                        <p>Всего заказов: {orders.length}</p>
+                    </div>
+
+                    <div className="content">
+                        <h2>Список заказов ({orders.length})</h2>
+                        <table className="orders-table">
+                            <thead>
+                                <tr>
+                                    <th className="table__text">ID</th>
+                                    <th className="table__text">Email</th>
+                                    <th className="table__text">Логин</th>
+                                    <th className="table__text">Цена</th>
+                                    <th className="table__text">Категория</th>
+                                    <th className="table__text">ID товара</th>
+                                    <th className="table__text">Название товара</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {orders.map(order => (
+                                    <tr key={order.id}>
+                                        <td className="table__text">{order.id}</td>
+                                        <td className="table__text">{order.email}</td>
+                                        <td className="table__text">{order.login || '-'}</td>
+                                        <td className="table__text">{order.price}₽</td>
+                                        <td className="table__text">{order.type}</td>
+                                        <td className="table__text">{order.idProduct}</td>
+                                        <td className="table__text">{order.title}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
         </div>
     );
 }
