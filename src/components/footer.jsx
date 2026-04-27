@@ -9,8 +9,8 @@ export default function Footer() {
           <div className="footer__contact">
             <p className="contact__title title">Связь с нами</p>
             <ul className="contact__list footer__list">
-              <a href="https://t.me/cmrt_aao"><li className="footer__el"><img src="/img/telegram2.svg" className="el__img" alt="" /><p className="el__text">Поддержка покупателей</p></li></a>
-              <a href="https://t.me/cmrt_aao"><li className="footer__el"><img src="/img/telegram2.svg" className="el__img" alt="" /><p className="el__text">Сотрудничество</p></li></a>
+              <a href=""><li className="footer__el"><img src="/img/telegram2.svg" className="el__img" alt="" /><p className="el__text">Поддержка покупателей</p></li></a>
+              <a href=""><li className="footer__el"><img src="/img/telegram2.svg" className="el__img" alt="" /><p className="el__text">Сотрудничество</p></li></a>
             </ul>
           </div>
           <div className="footer__about">

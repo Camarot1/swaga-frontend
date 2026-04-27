@@ -41,7 +41,7 @@ export default function SubContent() {
                     <div className="main__info">
                         <img src="../img/sub__img-big.svg" className="info__img" alt="" />
                         <div className="info__content">
-                            <div className="content__title">Купить подписку <span className="content">{sub?.title} {sub?.id}</span></div>
+                            <div className="content__title">Купить подписку <span className="content">{sub?.title}</span></div>
                             <div className="content__conditions">
                                 {sub?.need_vpn !== null && (
                                     <p className="condition">
@@ -50,17 +50,17 @@ export default function SubContent() {
                                 )}
                                 {sub?.is_official !== null && (
                                     <p className="condition">
-                                        {sub.need_vpn ? ' Неофициальные ключи' : 'Официальные ключи'}
+                                        {sub.is_official ? ' Официальные ключи' : 'Неофициальные ключи'}
                                     </p>
                                 )}
                                 {sub?.instant_delivery !== null && (
                                     <p className="condition">
-                                        {sub.need_vpn ? ' Доставка не моментальная' : 'Моментальная доставка'}
+                                        {sub.instant_delivery ? 'Моментальная доставка' : 'Доставка не моментальная'}
                                     </p>
                                 )}
                                 {sub?.no_account_transfer !== null && (
                                     <p className="condition">
-                                        {sub.need_vpn ? 'Товар кодом' : ' С передачей аккаунта'}
+                                        {sub.no_account_transfer ? 'Товар кодом' : ' С передачей аккаунта'}
                                     </p>
                                 )}
                             </div>
@@ -69,7 +69,6 @@ export default function SubContent() {
                     <div className="main__content">
                         <div className="content__price">
                             <div className="price__block">
-                                { /*<div className="block__img"><img src="./img/sub__img-small.svg" alt="" /></div> */}
                                 <div className="block__money">
                                     <p className="money__title">{sub?.title || "Название подписки"}</p>
                                     <p className="money__text">{sub?.priceNew}₽</p>

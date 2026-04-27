@@ -15,6 +15,7 @@ import Profile from './pages/profile/profile.jsx'
 import OrderPage from './pages/order/orderPage.jsx'
 import NotFound from './pages/notFound/notFound.jsx'
 import Cookie from './components/cookie.jsx';
+import SearchPage from './pages/search/search.jsx'
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
@@ -42,6 +43,7 @@ function App() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/orderPage" element={<OrderPage />}></Route>
+            <Route path="/search" element={<SearchPage/>}></Route>
             <Route path="/admin" element={<AdminPage />}></Route>
             <Route path="/admin/subs" element={<AdminSubs />}></Route>
             <Route path="/admin/users" element={<AdminUsers />}></Route>

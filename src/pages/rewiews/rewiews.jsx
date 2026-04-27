@@ -54,9 +54,11 @@ export default function RewiewsContent() {
                                 <p className="bott__text">Я остался недоволен.</p>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </main>
         </div>
     )
 }
+

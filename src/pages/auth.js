@@ -1,9 +1,7 @@
-
 export const getToken = () => localStorage.getItem('token');
 export const setToken = (token) => localStorage.setItem('token', token);
 export const removeToken = () => localStorage.removeItem('token');
-
-// Декодирование JWT (без проверки подписи) – для получения логина и других данных
+// Декод токена
 export const decodeToken = (token) => {
     if (!token) return null;
     try {
@@ -14,27 +12,39 @@ export const decodeToken = (token) => {
         return null;
     }
 };
-
-// Получение данных пользователя из токена (только для UI, не для прав)
+// Получение данных пользователя из токена
 export const getUserFromToken = () => {
     const token = getToken();
     if (!token) return null;
     const payload = decodeToken(token);
     if (!payload) return null;
+
+
     return {
         id: payload.id,
         login: payload.login,
-        // isAdmin не используем для принятия решений, только для отображения (если нужно)
-        isAdmin: payload.isAdmin === 1
+        exp: payload.exp
     };
 };
 
-// Выход из системы
+export const isTokenExpired = () =>{
+    const token = getToken()
+    if (!token) return true
+
+    const payload = decodeToken(token)
+    if (!payload || !payload.exp) return true
+
+    const currentTime = Math.floor(Date.now() / 1000)
+    return payload.exp < currentTime
+}
+
+
 export const logout = () => {
     removeToken();
 };
 
-// Проверка прав администратора через сервер
+
+// проверка прав администратора через сервер
 export const checkAdmin = async () => {
     const token = getToken();
     if (!token) return false;

@@ -52,12 +52,12 @@ export default function AdminOrders() {
                         <button className="back-btn" onClick={() => navigate('/admin')}>
                             Назад в админку
                         </button>
-                        <h1>Управление заказами</h1>
-                        <p>Всего заказов: {orders.length}</p>
+                        <h1 className="table__text">Управление заказами</h1>
+                        <p className="table__text"> Всего заказов: {orders.length}</p>
                     </div>
 
                     <div className="content">
-                        <h2>Список заказов ({orders.length})</h2>
+                        <h2 className="table__text">Список заказов</h2>
                         <table className="orders-table">
                             <thead>
                                 <tr>

@@ -2,17 +2,14 @@ import React, { useState } from 'react';
 import './login.scss';
 import { useNavigate, Link } from 'react-router-dom';
 import { setToken, decodeToken } from '../auth';
-
 export default function Login() {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-
         try {
             const response = await fetch(`${process.env.REACT_APP_URL}/users/login`, {
                 method: 'POST',
@@ -21,9 +18,7 @@ export default function Login() {
                 },
                 body: JSON.stringify({ login, password }),
             });
-
             const data = await response.json();
-
             if (data.success) {
                 setToken(data.token);
                 const payload = decodeToken(data.token);
@@ -36,7 +31,6 @@ export default function Login() {
             setError('Ошибка соединения с сервером');
         }
     };
-
     return (
         <div className="login-page">
             <main className="main">

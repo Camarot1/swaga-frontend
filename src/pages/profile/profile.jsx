@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserFromToken, logout } from '../auth';
+import { getUserFromToken, isTokenExpired, logout } from '../auth';
 import './profile.scss';
 
 export default function Profile() {
@@ -10,6 +10,11 @@ export default function Profile() {
 
     useEffect(() => {
         const user = getUserFromToken();
+        if (isTokenExpired()){
+            logout()
+            navigate('/login')
+            return
+        }
         if (!user) {
             logout();
             navigate('/login');
@@ -35,6 +40,13 @@ export default function Profile() {
                     <div className="main__text">
                         <p className="text__info">Профиль</p>
                         <p className="text__name">{login}</p>
+                       
+                        <button
+                                className="text__logout"
+                                onClick={handleLogout}
+                            >
+                                Выйти
+                            </button>
                     </div>
                     <div className="main__order">
                         <div className="order__buttons">

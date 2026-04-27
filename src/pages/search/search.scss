@@ -1,0 +1,39 @@
+.search-page {
+    .main__container {
+        display: flex;
+        flex-direction: column;
+        padding: 20px 15px;
+
+        * {
+            color: white;
+        }
+
+        .main__title {
+            align-self: center;
+            font-size: 48px;
+        }
+
+        .blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .block {
+                .block__title {
+                    font-size: 25px;
+                }
+                .block__cards{
+                    display: flex;
+                    gap: 15px;
+                    flex-wrap: wrap;
+                    .card{
+                        padding: 20px 0;
+                        .card__img{
+                            max-height: 250px;
+                            max-width: 350px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

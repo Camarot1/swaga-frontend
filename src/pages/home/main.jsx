@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 export default function MainContent() {
   const [poster, setPoster] = useState([])
-
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/poster`)
       .then((res) => res.json())
@@ -115,6 +114,3 @@ export default function MainContent() {
     </div>
   );
 }
-// insert into poster (poster) values ('/img/xbox.png');
-// insert into poster (poster) values ('/img/play.png');
-// insert into poster (poster) values ('/img/net.png');

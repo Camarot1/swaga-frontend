@@ -11,7 +11,6 @@ export default function Register() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({
@@ -19,12 +18,10 @@ export default function Register() {
             [name]: value
         }));
     };
-
     const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
     try {
         const response = await fetch(`${process.env.REACT_APP_URL}/users/register`, {
             method: 'POST',
@@ -33,9 +30,7 @@ export default function Register() {
             },
             body: JSON.stringify(formData),
         });
-
         const data = await response.json();
-
         if (data.success) {
             alert('Регистрация успешна');
             navigate('/login');

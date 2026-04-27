@@ -38,7 +38,7 @@ export default function AdminPage() {
             <main className="admin-page__main">
                 <div className="admin-page__container">
                     <div className="admin-page__header">
-                        <h1 className="admin-page__title">Админ панель</h1>
+                        <h1 className="admin-page__title table__text">Админ панель</h1>
                         <div className="admin-page__user-info">
                             <button
                                 className="admin-page__logout-btn"
@@ -50,7 +50,7 @@ export default function AdminPage() {
                     </div>
 
                     <div className="admin-page__navigation">
-                        <h2 className="admin-page__nav-title">Управление</h2>
+                        <h2 className="admin-page__nav-title table__text">Управление</h2>
                         <div className="admin-page__nav-buttons">
                             <button
                                 className="admin-page__nav-btn"

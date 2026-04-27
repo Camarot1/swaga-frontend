@@ -101,12 +101,9 @@ export default function OrderPage() {
                             />
                         </div>
                     )}
-
-
                     <div className="order-total">
                         Итого: {orderData.price}
                     </div>
-
                     <button
                         type="submit"
                         className="submit-btn"

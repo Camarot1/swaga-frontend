@@ -3,10 +3,8 @@
     padding-right: 15px;
 }
 
-.admin-page {
-    * {
-        color: black;
-    }
+.admin-page__main {
+    background-color: #1B1B1B;
 }
 .main{
     background-color: black;
@@ -23,6 +21,7 @@
         border: 1px solid #3533A1;
         border-radius: 10px;
         cursor: pointer;
+        background-color: white;
     }
 }
 .admin-subs-page{
