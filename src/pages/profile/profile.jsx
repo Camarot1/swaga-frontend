@@ -7,6 +7,7 @@ export default function Profile() {
     const navigate = useNavigate();
     const [login, setLogin] = useState('');
     const [loading, setLoading] = useState(true);
+    const [email, setEmail] = useState('')
 
     useEffect(() => {
         const user = getUserFromToken();
@@ -21,6 +22,7 @@ export default function Profile() {
             return;
         }
         setLogin(user.login);
+        setEmail(user.email)
         setLoading(false);
     }, [navigate]);
 
@@ -40,7 +42,7 @@ export default function Profile() {
                     <div className="main__text">
                         <p className="text__info">Профиль</p>
                         <p className="text__name">{login}</p>
-                       
+                        <div className="text__name">{email}</div>
                         <button
                                 className="text__logout"
                                 onClick={handleLogout}
@@ -50,8 +52,7 @@ export default function Profile() {
                     </div>
                     <div className="main__order">
                         <div className="order__buttons">
-                            <button className="order__button relevant">Активные</button>
-                            <button className="order__button finished">Выполнено</button>
+                            <button className="order__button relevant">Заказы</button>
                         </div>
                         <div className="order__list">
                             <div className="list__item">

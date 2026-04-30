@@ -19,10 +19,10 @@ export const getUserFromToken = () => {
     const payload = decodeToken(token);
     if (!payload) return null;
 
-
     return {
         id: payload.id,
         login: payload.login,
+        email: payload.email,
         exp: payload.exp
     };
 };

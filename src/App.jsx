@@ -7,7 +7,7 @@ import CatalogSubContent from './pages/catalogSub/catalogSub.jsx'
 import ItemContent from './pages/item/item.jsx'
 import SubContent from './pages/sub/sub.jsx'
 import DonateContent from './pages/donate/donate.jsx'
-import RewiewsContent from './pages/rewiews/rewiews.jsx'
+import ReviewsContent from './pages/rewiews/reviews.jsx'
 import WarningContent from './pages/warning/warning.jsx'
 import Login from './pages/login/login.jsx'
 import Register from './pages/register/register.jsx'
@@ -37,7 +37,7 @@ function App() {
             <Route path="/item/:id" element={<ItemContent />} />
             <Route path="/sub/:id" element={<SubContent />}></Route>
             <Route path="/donate" element={<DonateContent />}></Route>
-            <Route path="/rewiews" element={<RewiewsContent />}></Route>
+            <Route path="/rewiews" element={<ReviewsContent />}></Route>
             <Route path="/warning" element={<WarningContent />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>

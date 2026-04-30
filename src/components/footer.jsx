@@ -25,7 +25,7 @@ export default function Footer() {
           <a href="/">
             <p className="logo__name">СВАГА</p>
           </a>
-          <p className="logo__date">2025</p>
+          <p className="logo__date">2026</p>
 
 
           <div className="steam-attribution-compact">

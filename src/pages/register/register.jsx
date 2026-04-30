@@ -6,7 +6,8 @@ export default function Register() {
     const [formData, setFormData] = useState({
         login: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        email: ''
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -19,30 +20,30 @@ export default function Register() {
         }));
     };
     const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-    try {
-        const response = await fetch(`${process.env.REACT_APP_URL}/users/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-        if (data.success) {
-            alert('Регистрация успешна');
-            navigate('/login');
-        } else {
-            setError(data.message);
+        e.preventDefault();
+        setError('');
+        setLoading(true);
+        try {
+            const response = await fetch(`${process.env.REACT_APP_URL}/users/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData),
+            });
+            const data = await response.json();
+            if (data.success) {
+                alert('Регистрация успешна');
+                navigate('/login');
+            } else {
+                setError(data.message);
+            }
+        } catch (error) {
+            setError('Ошибка сервера');
+        } finally {
+            setLoading(false);
         }
-    } catch (error) {
-        setError('Ошибка сервера');
-    } finally {
-        setLoading(false);
-    }
-};
+    };
 
 
     return (
@@ -56,9 +57,9 @@ export default function Register() {
 
                         <div className="form__block">
                             <p className="block__text">Логин</p>
-                            <input 
-                                type="text" 
-                                className="block__input" 
+                            <input
+                                type="text"
+                                className="block__input"
                                 name="login"
                                 value={formData.login}
                                 onChange={handleInputChange}
@@ -67,10 +68,22 @@ export default function Register() {
                         </div>
 
                         <div className="form__block">
+                            <p className="block__text">Ваша почта</p>
+                            <input
+                                type="email"
+                                className="block__input"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+
+                        <div className="form__block">
                             <p className="block__text">Пароль</p>
-                            <input 
-                                type="password" 
-                                className="block__input" 
+                            <input
+                                type="password"
+                                className="block__input"
                                 name="password"
                                 value={formData.password}
                                 onChange={handleInputChange}
@@ -80,9 +93,9 @@ export default function Register() {
 
                         <div className="form__block">
                             <p className="block__text">Повторите пароль</p>
-                            <input 
-                                type="password" 
-                                className="block__input" 
+                            <input
+                                type="password"
+                                className="block__input"
                                 name="confirmPassword"
                                 value={formData.confirmPassword}
                                 onChange={handleInputChange}
@@ -90,8 +103,8 @@ export default function Register() {
                             />
                         </div>
 
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             className="form__profile"
                             disabled={loading}
                         >
