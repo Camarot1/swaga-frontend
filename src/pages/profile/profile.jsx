@@ -83,6 +83,8 @@ export default function Profile() {
                                 <div className="list__item">
                                     <p className="item__title">{item.type}</p>
                                     <p className="item__money">{item.price}</p>
+                                    <p className="item__money">{item.email}</p>
+                                    <p className="item__money">{item.login}</p>
                                 </div>
                             ))}
                             {/* <div className="list__item">
