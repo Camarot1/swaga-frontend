@@ -45,7 +45,6 @@ export default function Register() {
         }
     };
 
-
     return (
         <div className="register-page">
             <main className="main">

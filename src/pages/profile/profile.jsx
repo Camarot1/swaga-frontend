@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserFromToken, isTokenExpired, logout } from '../auth';
+import { getUserFromToken, isTokenExpired, logout, getToken } from '../auth';
 import './profile.scss';
 
 export default function Profile() {
@@ -8,23 +8,47 @@ export default function Profile() {
     const [login, setLogin] = useState('');
     const [loading, setLoading] = useState(true);
     const [email, setEmail] = useState('')
+    const [history, setHistory] = useState([])
 
     useEffect(() => {
-        const user = getUserFromToken();
-        if (isTokenExpired()){
-            logout()
-            navigate('/login')
-            return
+        const loadData = async () => {
+            const user = getUserFromToken();
+            if (isTokenExpired()) {
+                logout()
+                navigate('/login')
+                return
+            }
+            if (!user) {
+                logout();
+                navigate('/login');
+                return;
+            }
+
+            await fetchHistory()
+            setLogin(user.login);
+            setEmail(user.email)
+            setLoading(false);
         }
-        if (!user) {
-            logout();
-            navigate('/login');
-            return;
-        }
-        setLogin(user.login);
-        setEmail(user.email)
-        setLoading(false);
+        loadData()
     }, [navigate]);
+
+    const fetchHistory = async () => {
+        try {
+            const token = getToken()
+            const response = await fetch(`${process.env.REACT_APP_URL}/users/history`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            const data = await response.json()
+            setHistory(data)
+            setLoading(false)
+        } catch (error) {
+            console.error('Ошибка получения истории:', error)
+            setLoading(false)
+        }
+    }
 
     const handleLogout = () => {
         logout();
@@ -44,21 +68,27 @@ export default function Profile() {
                         <p className="text__name">{login}</p>
                         <div className="text__name">{email}</div>
                         <button
-                                className="text__logout"
-                                onClick={handleLogout}
-                            >
-                                Выйти
-                            </button>
+                            className="text__logout"
+                            onClick={handleLogout}
+                        >
+                            Выйти
+                        </button>
                     </div>
                     <div className="main__order">
                         <div className="order__buttons">
                             <button className="order__button relevant">Заказы</button>
                         </div>
                         <div className="order__list">
-                            <div className="list__item">
+                            {history.map(item => (
+                                <div className="list__item">
+                                    <p className="item__title">{item.type}</p>
+                                    <p className="item__money">{item.price}</p>
+                                </div>
+                            ))}
+                            {/* <div className="list__item">
                                 <p className="item__title">Название услуги</p>
                                 <p className="item__money">1000 руб.</p>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

@@ -22,7 +22,6 @@ export default function OrderPage() {
         }
     }, [location, navigate]);
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);

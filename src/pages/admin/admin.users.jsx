@@ -10,6 +10,7 @@ export default function AdminUsers() {
     const [currentUser, setCurrentUser] = useState(null);
     const navigate = useNavigate();
 
+
     useEffect(() => {
         const verifyAdmin = async () => {
             const adminStatus = await checkAdmin();
