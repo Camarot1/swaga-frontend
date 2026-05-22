@@ -7,19 +7,23 @@ export default function DonateContent() {
     const navigate = useNavigate();
     const [currency, setCurrency] = useState('₽');
     const [amount, setAmount] = useState('1000');
-    const [promo, setPromo] = useState('');
     const [steamLogin, setSteamLogin] = useState('');
     const [activeSection, setActiveSection] = useState('instruction');
-    const [finalAmount, setFinalAmount] = useState('1100₽');
+    const [finalAmount, setFinalAmount] = useState();
+    const [tenge, setTenge] = useState()
+    const [dollar, setDollar] = useState()
 
 
     const [openFaqIndex, setOpenFaqIndex] = useState(null)
     useEffect(() => {
         const numAmount = parseFloat(amount) || 0;
-        const multiplier = promo ? 1.06 : 1.1;
-        const result = Math.ceil(numAmount * multiplier);
+        const result = Math.ceil(numAmount * 1.1);
+        const resultTenge = Math.ceil(numAmount * 6.58)
+        const resultDollar = Math.ceil(numAmount / 71.79)
+        setTenge(resultTenge)
+        setDollar(resultDollar)
         setFinalAmount(`${result}${currency}`);
-    }, [amount, promo, currency]);
+    }, [amount, currency]);
 
     const handlePayment = () => {
         if (!amount || !steamLogin) {
@@ -53,6 +57,7 @@ export default function DonateContent() {
         {
             question:'Какие регионы нельзя пополнить',
             answer:'Не получится пополнить аккаунты созданные на территории: Республики Крым, Донецкой Народной Республики, Луганской народной республики'
+            // да похуй пополняй че по кайфу
         }
     ]
 
@@ -68,20 +73,20 @@ export default function DonateContent() {
                         <img src="./img/donateImg.svg" alt="" className="top__img" />
                         <div className="top__block">
                             <p className="block__title">Пополните STEAM</p>
-                            <p className="block__text">Выберите валюту</p>
+                            {/* <p className="block__text">Выберите валюту</p> */}
                             <div className="block__button">
                                 <button
                                     className={`button button__changeMoney ${currency === '₽' ? 'active' : ''}`}
                                     onClick={() => setCurrency('₽')}
                                 >₽ RUB</button>
-                                <button
+                                {/* <button
                                     className={`button button__changeMoney ${currency === '₸' ? 'active' : ''}`}
                                     onClick={() => setCurrency('₸')}
                                 >₸ KZT</button>
                                 <button
                                     className={`button button__changeMoney ${currency === '$' ? 'active' : ''}`}
                                     onClick={() => setCurrency('$')}
-                                >$ USD</button>
+                                >$ USD</button> */}
                             </div>
                         </div>
                     </div>
@@ -148,7 +153,7 @@ export default function DonateContent() {
                                     />
                                 </div>
                                 <div className="block form__end">
-                                    <div className="end__title">Итого : <span className="end__result">{finalAmount}</span></div>
+                                    <div className="end__title">Итого : <span className="end__result">{finalAmount} {tenge}₸ {dollar}$</span></div>
                                     <div className="end__donate">Способ оплаты: <img className="end__donate" src="./img/donate__try.svg" alt="" /></div>
                                 </div>
                                 <div className="block form__button" onClick={handlePayment}>

@@ -82,7 +82,7 @@ export default function Profile() {
                             {history.map(item => (
                                 <div className="list__item">
                                     <p className="item__title">{item.type}</p>
-                                    <p className="item__money">{item.price}</p>
+                                    <p className="item__money">{item.price}₽</p>
                                     <p className="item__money">{item.email}</p>
                                     <p className="item__money">{item.login}</p>
                                 </div>
