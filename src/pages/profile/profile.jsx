@@ -43,10 +43,8 @@ export default function Profile() {
             })
             const data = await response.json()
             setHistory(data)
-            setLoading(false)
         } catch (error) {
             console.error('Ошибка получения истории:', error)
-            setLoading(false)
         }
     }
 

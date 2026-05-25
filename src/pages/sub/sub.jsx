@@ -92,7 +92,7 @@ export default function SubContent() {
                         <div className="content__instructions">
                             <p className="instruction__title">Инструкиция</p>
                             <p className="instruction__text">1. Выберите желаемый товар</p>
-                            <p className="instruction__text">2. Нажмите кнопку оплатить</p>
+                            <p className="instruction__text">2. Нажмите кнопку Купить</p>
                             <p className="instruction__text">3. Следуйте инструкциям на открывшейся странице</p>
                         </div>
                     </div>

@@ -13,7 +13,6 @@ export default function DonateContent() {
     const [tenge, setTenge] = useState()
     const [dollar, setDollar] = useState()
 
-
     const [openFaqIndex, setOpenFaqIndex] = useState(null)
     useEffect(() => {
         const numAmount = parseFloat(amount) || 0;
