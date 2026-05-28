@@ -102,7 +102,6 @@ export default function MainContent() {
             <div className="info__bott">
               <div className="bott">
                 <div className="bott__title">
-                  <img className="title__img" src="/img/logo.svg" alt="" />
                   <p className="title__text">Присоединяйся к нам</p>
                 </div>
                 <p className="bott__text">Создавай аккаунт на нашем сайте и смотри историю своих покупок</p>

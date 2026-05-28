@@ -106,7 +106,7 @@ export default function AdminUsers() {
                                 {users.map(user => (
                                     <tr key={user.id} className={user.id === currentUser?.id ? 'current-user' : ''}>
                                         <td className="table__text">{user.id}</td>
-                                        <td className="table__text">
+                                        <td className="table__text">            
                                             {user.login}
                                             {user.id === currentUser?.id && ' (Вы)'}
                                         </td>
