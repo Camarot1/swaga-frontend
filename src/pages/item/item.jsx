@@ -25,8 +25,8 @@ export default function ItemContent() {
                             slidesPerView: 2,
                             freeMode: true,
                             breakpoints: {
-                                450: { slidesPerView: 2.1, spaceBetween: 10 },
-                                900: { slidesPerView: 3, spaceBetween: 10 },
+                                450: { slidesPerView: 1.5, spaceBetween: 10 },
+                                900: { slidesPerView: 2.5, spaceBetween: 10 },
                                 1100: { slidesPerView: 3, spaceBetween: 10 },
                                 1340: { slidesPerView: 2.2, spaceBetween: 10, },
                                 1600: { slidesPerView: 2.2, spaceBetween: 15, },
