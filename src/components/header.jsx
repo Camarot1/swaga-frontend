@@ -20,7 +20,6 @@ export default function Header() {
           <a href="/catalogSub">
             <button className="navigation__button header__hide big2">Подписки</button>
           </a>
-          {/* Поиск */}
           <form onSubmit={handleSearch} className="search-form">
             <input 
               type="text" 

@@ -3,6 +3,9 @@
         display: flex;
         flex-direction: column;
         padding: 20px 15px;
+        $gray-900: #121212;
+        $purple-900: #1a0b2e;
+        background: linear-gradient(135deg, $gray-900 0%, $purple-900 50%, $gray-900 100%) !important;
 
         * {
             color: white;
@@ -17,17 +20,21 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+
             .block {
                 .block__title {
                     font-size: 25px;
                 }
-                .block__cards{
+
+                .block__cards {
                     display: flex;
                     gap: 15px;
                     flex-wrap: wrap;
-                    .card{
+
+                    .card {
                         padding: 20px 0;
-                        .card__img{
+
+                        .card__img {
                             max-height: 250px;
                             max-width: 350px;
                         }

@@ -1,11 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+$purple-900: #1a0b2e;
+$purple-800: #2d1b4e;
+$purple-700: #4a2c7a;
+$purple-600: #6b21cc;
+$purple-500: #9f4dff;
+$purple-400: #c084fc;
+$purple-300: #d8b4fe;
+$purple-accent: #3533A1;
+$purple-accent-dark: #282680;
+$green-success: #1B9C10;
+$green-hover: #22c55e;
+$white: #ffffff;
+$gray-900: #121212;
+$black: #000000;
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+$shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
+$shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
+$shadow-glow: 0 0 20px rgba(156, 77, 255, 0.3);
+$shadow-glow-strong: 0 0 30px rgba(156, 77, 255, 0.5);
+$radius-sm: 8px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-xl: 32px;
+$radius-full: 50px;
+
 .hidden {
     display: none !important;
 }
 
 .purple {
-    background-color: #3533A1;
+    background: linear-gradient(135deg, $purple-600 0%, $purple-accent 100%);
+    box-shadow: $shadow-glow;
 }
 
 li {
@@ -16,6 +42,8 @@ button {
     outline: none;
     background: none;
     border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 a {
@@ -35,10 +63,10 @@ a {
 
 .donate-page {
     .main__container {
-        background-color: #1B1B1B;
+        background: linear-gradient(135deg, $gray-900 0%, $purple-900 50%, $gray-900 100%);
 
         * {
-            color: white;
+            color: $white;
         }
 
         .main__top {
@@ -49,6 +77,9 @@ a {
 
             .top__img {
                 margin-right: 160px;
+                filter: drop-shadow(0 0 20px $purple-500);
+                transition: all 0.3s ease;
+                
             }
 
             .top__block {
@@ -60,6 +91,8 @@ a {
                     font-size: 45px;
                     max-height: 39px;
                     margin-bottom: 68px;
+                    background: linear-gradient(135deg, $white 0%, $purple-400 100%);
+                    background-clip: text;
                 }
 
                 .block__text {
@@ -75,8 +108,11 @@ a {
                     .button {
                         font-size: 35px;
                         padding: 17px 61px;
-                        background-color: #3533A1;
-                        border-radius: 5px;
+                        background: linear-gradient(135deg, $purple-accent 0%, $purple-700 100%);
+                        border-radius: $radius-md;
+                        transition: all 0.3s ease;
+                        box-shadow: $shadow-sm;
+                        
                     }
                 }
             }
@@ -96,15 +132,29 @@ a {
                 .bottom__info {
                     .info__button {
                         display: flex;
-
+                        cursor: pointer;
+                        gap: 4px;
+                        
                         .button__text {
                             font-size: 35px;
-                            background: #282680;
+                            background: $purple-accent-dark;
                             padding: 33px 90px 33px 50px;
+                            border-radius: $radius-md $radius-md 0 0;
+                            transition: all 0.3s ease;
+                            
+                            
+                            &.purple {
+                                background: linear-gradient(135deg, $purple-600 0%, $purple-accent 100%);
+                                box-shadow: $shadow-glow;
+                            }
                         }
                     }
 
                     .info__drop {
+                        * {
+                            cursor: pointer;
+                        }
+                        
                         padding-top: 30px;
 
                         .drop__instruction,
@@ -112,10 +162,40 @@ a {
                             display: flex;
                             gap: 28px;
                             flex-direction: column;
+                            background: rgba(156, 77, 255, 0.1);
+                            padding: 30px;
+                            border-radius: $radius-lg;
+                            backdrop-filter: blur(10px);
+                            border: 1px solid rgba(156, 77, 255, 0.2);
 
                             .text {
                                 font-size: 30px;
                                 max-width: 560px;
+                                padding: 12px 0;
+                                transition: all 0.3s ease;
+
+                            }
+                            
+                            .question {
+                                border-bottom: 1px solid rgba(156, 77, 255, 0.3);
+                                cursor: pointer;
+                                
+                            }
+                        }
+                        
+                        .drop__faq {
+                            .faq-item {
+                                .faq-answer {
+                                    margin-top: 15px;
+                                    padding-left: 20px;
+                                    border-left: 2px solid $purple-500;
+                                    
+                                    .answer-text {
+                                        font-size: 24px;
+                                        color: $purple-300;
+                                        line-height: 1.4;
+                                    }
+                                }
                             }
                         }
                     }
@@ -129,12 +209,17 @@ a {
                     padding-bottom: 174px;
 
                     .block {
-                        background-color: #3533A1;
+                        background: linear-gradient(135deg, $purple-accent 0%, $purple-800 100%);
                         width: 820px;
+                        border-radius: $radius-md;
+                        transition: all 0.3s ease;
+                        box-shadow: $shadow-sm;
+                        
 
                         input {
-                            background-color: #3533A1;
+                            background: transparent;
                             border: none;
+                            outline: none;
                         }
                     }
 
@@ -144,10 +229,17 @@ a {
 
                         .money__title {
                             font-size: 20px;
+                            color: $purple-300;
+                            margin-bottom: 8px;
                         }
 
                         .input__money {
                             font-size: 35px;
+                            width: 90%;
+                            
+                            &::placeholder {
+                                color: rgba(255, 255, 255, 0.5);
+                            }
                         }
                     }
 
@@ -159,10 +251,20 @@ a {
 
                         .input__login {
                             font-size: 35px;
+                            width: 70%;
+                            
+                            &::placeholder {
+                                color: rgba(255, 255, 255, 0.5);
+                            }
                         }
 
                         .login__button {
                             font-size: 35px;
+                            background: $purple-600;
+                            padding: 8px 24px;
+                            border-radius: $radius-sm;
+                            transition: all 0.3s ease;
+                            
                         }
                     }
 
@@ -172,20 +274,39 @@ a {
 
                         .input__promo {
                             font-size: 35px;
+                            width: 90%;
+                            
+                            &::placeholder {
+                                color: rgba(255, 255, 255, 0.5);
+                            }
                         }
                     }
 
                     .form__end {
                         padding: 30px 0 30px 39px;
                         width: 781px;
-                        background-color: #282680;
+                        background: linear-gradient(135deg, $purple-accent-dark 0%, $purple-900 100%);
+                        border: 1px solid rgba(156, 77, 255, 0.3);
 
                         .end__title {
                             font-size: 35px;
+                            margin-bottom: 12px;
+                            
+                            .end__result {
+                                color: $purple-400;
+                                font-weight: bold;
+                            }
                         }
 
                         .end__donate {
                             font-size: 35px;
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                            
+                            img {
+                                filter: drop-shadow(0 0 5px $purple-500);
+                            }
                         }
                     }
 
@@ -193,20 +314,24 @@ a {
                         display: flex;
                         align-items: center;
                         flex-direction: column;
-                        background-color: #1B9C10;
+                        background: linear-gradient(135deg, $green-success 0%, #15803d 100%);
                         padding: 30px 0;
                         font-size: 35px;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        border-radius: $radius-md;
+                        font-weight: bold;
+
                     }
                 }
             }
         }
-        .answer-text {
-        max-width: 30vw;
-        margin-top: 15px;
-    }
-    }
 
-    
+        .answer-text {
+            max-width: 30vw !important;
+            margin-top: 15px;
+        }
+    }
 
     @media (max-width: 1919px) {
         .main__container {
@@ -223,6 +348,7 @@ a {
 
                         .button {
                             font-size: 25px;
+                            padding: 12px 40px;
                         }
                     }
                 }
@@ -238,7 +364,7 @@ a {
 
                             .button__text {
                                 font-size: 30px;
-                                background: #282680;
+                                background: $purple-accent-dark;
                                 padding: 27px 30px 27px 30px;
                             }
                         }
@@ -310,10 +436,12 @@ a {
                 }
             }
         }
+
         .answer-text {
-        max-width: 30vw;
-        margin-top: 15px;
-    }
+            max-width: 30vw;
+            margin-top: 15px;
+            font-size: 15px;
+        }
     }
 
     @media (max-width: 1340px) {
@@ -373,7 +501,6 @@ a {
                         }
 
                         .info__drop {
-
                             .drop__instruction,
                             .drop__faq {
                                 .text {
@@ -464,7 +591,6 @@ a {
 
                     .bottom__info {
                         .info__button {
-
                             .button__text {
                                 font-size: 20px;
                                 padding: 15px 20px;
@@ -472,7 +598,6 @@ a {
                         }
 
                         .info__drop {
-
                             .drop__instruction,
                             .drop__faq {
                                 .text {
@@ -538,13 +663,12 @@ a {
                 }
             }
         }
-        .answer-text {
-        margin-top: 15px;
-        max-width: 70vw;
-    }
-    }
 
-    
+        .answer-text {
+            margin-top: 15px;
+            max-width: 70vw;
+        }
+    }
 
     @media (max-width: 500px) {
         .main__container {
@@ -588,7 +712,6 @@ a {
 
                     .bottom__info {
                         .info__button {
-
                             .button__text {
                                 font-size: 18px;
                                 text-align: center;
@@ -597,9 +720,10 @@ a {
                         }
 
                         .info__drop {
-
                             .drop__instruction,
                             .drop__faq {
+                                padding: 20px;
+                                
                                 .text {
                                     font-size: 16px;
                                 }
@@ -611,6 +735,9 @@ a {
                         .form__end {
                             .end__donate {
                                 max-width: 60vw;
+                                flex-direction: column;
+                                align-items: flex-start;
+                                gap: 8px;
                             }
                         }
 
@@ -622,5 +749,10 @@ a {
                 }
             }
         }
+    }
+    .answer-text{
+        font-size: 15px !important;
+        line-height: 1;
+        max-width: 60vw !important;
     }
 }

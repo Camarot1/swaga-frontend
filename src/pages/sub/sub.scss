@@ -1,5 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+$purple-900: #1a0b2e;
+$purple-800: #2d1b4e;
+$purple-700: #4a2c7a;
+$purple-600: #6b21cc;
+$purple-500: #9f4dff;
+$purple-400: #c084fc;
+$purple-300: #d8b4fe;
+$purple-accent: #3533A1;
+$purple-accent-dark: #282680;
+$green-success: #1B9C10;
+$white: #ffffff;
+$gray-900: #121212;
+$black: #000000;
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+$shadow-md: 0 4px 20px rgba(0, 0, 0, 0.3);
+$shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
+$shadow-glow: 0 0 20px rgba(156, 77, 255, 0.3);
+$radius-sm: 8px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-full: 50px;
+
 li {
     list-style-type: none;
 }
@@ -8,6 +30,7 @@ button {
     outline: none;
     background: none;
     border: none;
+    cursor: pointer;
 }
 
 a {
@@ -18,6 +41,7 @@ a {
     font-family: Montserrat;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 .sub-page {
@@ -27,13 +51,13 @@ a {
     }
 
     .main__container {
-        background-color: #1B1B1B;
+        background: linear-gradient(135deg, $gray-900 0%, $purple-900 50%, $gray-900 100%);
         padding-left: 130px;
         display: flex;
         flex-direction: column;
 
         * {
-            color: white;
+            color: $white;
         }
 
         .main__back {
@@ -41,6 +65,7 @@ a {
             display: flex;
             align-items: center;
             gap: 43px;
+            cursor: pointer;
 
             .back__title {
                 font-size: 35px;
@@ -51,6 +76,10 @@ a {
             display: flex;
             margin-bottom: 92px;
 
+            .info__img {
+                filter: drop-shadow($shadow-md);
+            }
+
             .info__content {
                 display: flex;
                 flex-direction: column;
@@ -59,6 +88,10 @@ a {
                 .content__title {
                     font-size: 45px;
                     margin-bottom: 36px;
+                    background: linear-gradient(135deg, $white 0%, $purple-400 100%);
+                    background-clip: text;
+                    -webkit-background-clip: text;
+                    color: transparent;
                 }
 
                 .content__conditions {
@@ -66,15 +99,21 @@ a {
                     flex-wrap: wrap;
                     max-width: 960px;
                     gap: 37px;
-                    background-color: #3533A1;
+                    background: linear-gradient(135deg, $purple-accent 0%, $purple-700 100%);
                     padding: 48px 0 48px 57px;
                     margin-left: 160px;
+                    border-radius: $radius-lg;
+                    box-shadow: $shadow-md;
+                    border: 1px solid rgba(156, 77, 255, 0.2);
 
                     .condition {
                         font-size: 25px;
                         padding: 23px 29px;
-                        background-color: #D9D9D9;
-                        color: black;
+                        background: linear-gradient(135deg, $purple-800 0%, $purple-900 100%);
+                        color: $white;
+                        border-radius: $radius-full;
+                        box-shadow: $shadow-sm;
+                        border: 1px solid rgba(156, 77, 255, 0.2);
                     }
                 }
             }
@@ -88,25 +127,34 @@ a {
             margin-bottom: 70px;
 
             .content__price {
-                background-color: #3533A1;
+                background: linear-gradient(135deg, $purple-accent 0%, $purple-800 100%);
                 display: flex;
                 flex-wrap: wrap;
                 max-width: 1101px;
                 padding: 20px;
                 justify-content: space-around;
+                border-radius: $radius-lg;
+                box-shadow: $shadow-md;
+                border: 1px solid rgba(156, 77, 255, 0.2);
 
                 .price__block {
-                    border: 1px solid black;
+                    border: 1px solid rgba(156, 77, 255, 0.3);
                     display: flex;
                     align-items: center;
-                    border-radius: 5px;
+                    border-radius: $radius-md;
                     gap: 29px;
                     padding: 7px 53px 6px 17px;
+                    background: rgba(0, 0, 0, 0.2);
 
                     .block__money {
                         display: flex;
                         gap: 15px;
                         flex-direction: column;
+                        
+                        .money__price {
+                            color: $purple-400;
+                            font-weight: bold;
+                        }
                     }
                 }
             }
@@ -114,7 +162,11 @@ a {
             .content__button {
                 font-size: 35px;
                 padding: 18px 206px;
-                background-color: #1B9C10;
+                background: linear-gradient(135deg, $green-success 0%, #15803d 100%);
+                border-radius: $radius-full;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: $shadow-sm;
             }
 
             .content__instructions {
@@ -122,8 +174,11 @@ a {
                 flex-direction: column;
                 align-items: center;
                 gap: 28px;
-                background-color: #3533A1;
+                background: linear-gradient(135deg, $purple-accent 0%, $purple-800 100%);
                 padding: 27px 200px;
+                border-radius: $radius-lg;
+                box-shadow: $shadow-md;
+                border: 1px solid rgba(156, 77, 255, 0.2);
 
                 * {
                     text-align: start;
@@ -131,10 +186,15 @@ a {
 
                 .instruction__title {
                     font-size: 35px;
+                    background: linear-gradient(135deg, $purple-400 0%, $white 100%);
+                    background-clip: text;
+                    -webkit-background-clip: text;
+                    color: transparent;
                 }
 
                 .instruction__text {
                     font-size: 30px;
+                    line-height: 1.4;
                 }
             }
         }
@@ -152,6 +212,7 @@ a {
 
                         .condition {
                             padding: 20px 25px;
+                            font-size: 22px;
                         }
                     }
                 }
@@ -190,6 +251,7 @@ a {
 
                         .condition {
                             font-size: 20px;
+                            padding: 15px 20px;
                         }
                     }
                 }
@@ -225,6 +287,14 @@ a {
 
                     .content__title {
                         text-align: center;
+                        font-size: 30px;
+                    }
+                    
+                    .content__conditions {
+                        margin-left: 0;
+                        margin-right: 20px;
+                        justify-content: center;
+                        padding: 30px 20px;
                     }
                 }
             }
@@ -233,13 +303,21 @@ a {
                 .content__price {
                     max-width: 90vw;
                     padding: 10px;
+                    gap: 15px;
 
                     .price__block {
-                        .block__img{
+                        .block__img {
                             width: 50px;
                         }
-                        img{
-                            width:50px;
+                        
+                        img {
+                            width: 50px;
+                        }
+                        
+                        .block__money {
+                            .money__text {
+                                font-size: 18px;
+                            }
                         }
                     }
                 }
@@ -252,10 +330,19 @@ a {
 
                 .content__button {
                     padding: 18px 5vw;
+                    font-size: 28px;
                 }
 
                 .content__instructions {
                     padding: 27px 10vw;
+                    
+                    .instruction__title {
+                        font-size: 28px;
+                    }
+                    
+                    .instruction__text {
+                        font-size: 22px;
+                    }
                 }
             }
         }
@@ -263,6 +350,12 @@ a {
 
     @media (max-width: 500px) {
         .main__container {
+            .main__back {
+                .back__title {
+                    font-size: 25px;
+                }
+            }
+            
             .main__info {
                 .info__img {
                     max-width: 40vw;
@@ -273,8 +366,18 @@ a {
                 }
 
                 .info__content {
+                    .content__title {
+                        font-size: 24px;
+                    }
+                    
                     .content__conditions {
-                        padding: 48px 0 48px 0px;
+                        padding: 30px 15px;
+                        gap: 20px;
+                        
+                        .condition {
+                            padding: 10px 16px;
+                            font-size: 16px;
+                        }
                     }
                 }
             }
@@ -282,9 +385,33 @@ a {
             .main__content {
                 .content__price {
                     padding: 7px;
+                    gap: 10px;
 
                     .price__block {
                         margin-left: 0;
+                        padding: 5px 20px 5px 10px;
+                        gap: 10px;
+                        
+                        .block__money {
+                            .money__text {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+                
+                .content__button {
+                    font-size: 22px;
+                    padding: 15px 30px;
+                }
+                
+                .content__instructions {
+                    .instruction__title {
+                        font-size: 22px;
+                    }
+                    
+                    .instruction__text {
+                        font-size: 16px;
                     }
                 }
             }

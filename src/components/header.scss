@@ -1,13 +1,18 @@
+$purple-dark: #1a0b2e;
+$purple-mid: #2d1b4e;
+$purple-border: #3E3BF0;
+$white: #ffffff;
+
 .header {
     .header__container {
         display: flex;
         align-items: center;
-        background-color: #3533A1;
+        background: linear-gradient(135deg, $purple-dark 0%, $purple-mid 50%, $purple-dark 100%);
         padding: 0 0 0 120px;
 
         .header__name {
             font-size: 48px;
-            color: white;
+            color: $white;
             margin-right: 77px;
             padding: 27px 0;
         }
@@ -28,10 +33,10 @@
             .navigation__button {
                 white-space: nowrap;
                 width: 260px;
-                border: 1px solid #3E3BF0;
+                border: 1px solid $purple-border;
                 border-radius: 7px;
                 padding: 12px 25px;
-                color: white;
+                color: $white;
             }
 
             .big {
@@ -124,7 +129,7 @@
         .burger span {
             height: 4px;
             width: 100%;
-            background: #ffffff;
+            background: $white;
             border-radius: 5px;
         }
     }

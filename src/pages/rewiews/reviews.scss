@@ -32,7 +32,9 @@ a {
 
 .rewiews-page {
     .main__container {
-        background-color: #1B1B1B;
+        $gray-900: #121212;
+$purple-900: #1a0b2e;
+background: linear-gradient(135deg, $gray-900 0%, $purple-900 50%, $gray-900 100%) !important;
         @include column();
 
         .main__title {

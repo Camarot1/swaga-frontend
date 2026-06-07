@@ -196,7 +196,7 @@ export default function AdminSubs() {
                                 <div className="checkboxes">
                                     <label className="checkbox-label">
                                         <input
-                                            type="checkbox"
+                                    type="checkbox"
                                             name="need_vpn"
                                             checked={formData.need_vpn}
                                             onChange={handleInputChange}

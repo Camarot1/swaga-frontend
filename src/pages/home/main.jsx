@@ -101,9 +101,7 @@ export default function MainContent() {
             </div>
             <div className="info__bott">
               <div className="bott">
-                <div className="bott__title">
-                  <p className="title__text">Присоединяйся к нам</p>
-                </div>
+                <p className="title__text">Присоединяйся к нам</p>
                 <p className="bott__text">Создавай аккаунт на нашем сайте и смотри историю своих покупок</p>
               </div>
             </div>
