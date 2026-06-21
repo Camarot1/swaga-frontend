@@ -95,7 +95,7 @@ export default function MainContent() {
               <a href="./catalog">
                 <div className="top__third">
                   <p className="third__text">Покупка игр в STEAM</p>
-                  <img className="third__img" src="/img/buySteam.svg" alt="" />
+                  <img className="third__img" src="/img/steam.png" alt="" />
                 </div>
               </a>
             </div>

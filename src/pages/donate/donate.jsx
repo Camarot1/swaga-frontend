@@ -69,7 +69,7 @@ export default function DonateContent() {
             <main className="main">
                 <div className="main__container container">
                     <div className="main__top">
-                        <img src="./img/donateImg.svg" alt="" className="top__img" />
+                        <img src="./img/steam.png   " alt="" className="top__img" />
                         <div className="top__block">
                             <p className="block__title">Пополните STEAM</p>
                             {/* <p className="block__text">Выберите валюту</p> */}

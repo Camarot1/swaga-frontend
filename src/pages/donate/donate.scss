@@ -79,6 +79,7 @@ a {
                 margin-right: 160px;
                 filter: drop-shadow(0 0 20px $purple-500);
                 transition: all 0.3s ease;
+                max-width: 30%;
                 
             }
 
@@ -559,7 +560,7 @@ a {
                 margin-bottom: 50px;
 
                 .top__img {
-                    width: 200px;
+                    max-width: 300px;
                     margin-bottom: 30px;
                 }
 
