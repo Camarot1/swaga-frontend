@@ -80,7 +80,6 @@ export default function MainContent() {
                 <div className="second__top">
                   <p className="top__title">Наши контакты</p>
                   <ul className="top__list">
-                    <li className="el"><div className="li__block"><img className="block__img" src="/img/tg.svg" alt="" /><p className="block__text">TG</p></div></li>
                     <li className="el"><div className="li__block"><img className="block__img" src="/img/VK.svg" alt="" /><p className="block__text">ВК</p></div></li>
                     <li className="el"><div className="li__block"><img className="block__img" src="/img/dzen.svg" alt="" /><p className="block__text">DZEN</p></div></li>
                   </ul>
