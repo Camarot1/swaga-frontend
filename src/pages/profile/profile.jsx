@@ -10,6 +10,10 @@ export default function Profile() {
     const [email, setEmail] = useState('')
     const [history, setHistory] = useState([])
 
+    const [reviewText, setReviewText] = useState('');
+    const [reviewReaction, setReviewReaction] = useState(null);
+    const [submitting, setSubmitting] = useState(false);
+
     useEffect(() => {
         const loadData = async () => {
             const user = getUserFromToken();
@@ -53,6 +57,53 @@ export default function Profile() {
         navigate('/login');
     };
 
+    const handleSubmitReview = async (e) => {
+        e.preventDefault();
+        
+        if (!reviewText.trim()) {
+            alert('Пожалуйста, введите текст отзыва');
+            return;
+        }
+        
+        if (reviewReaction === null) {
+            alert('Пожалуйста, выберите реакцию');
+            return;
+        }
+
+        setSubmitting(true);
+        
+        try {
+            const token = getToken();
+            const response = await fetch(`${process.env.REACT_APP_URL}/reviews`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    login: login,
+                    reviewsText: reviewText,
+                    reviewsPoint: reviewReaction
+                })
+            });
+
+            const data = await response.json();
+            
+            if (data.success) {
+                alert('Отзыв успешно добавлен!');
+                setReviewText('');
+                setReviewReaction(null);
+            } else {
+                alert('Ошибка при добавлении отзыва');
+            }
+        } catch (error) {
+            console.error('Ошибка отправки отзыва:', error);
+            alert('Ошибка при отправке отзыва');
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
     if (loading) {
         return <div>Загрузка...</div>;
     }
@@ -78,18 +129,53 @@ export default function Profile() {
                         </div>
                         <div className="order__list">
                             {history.map(item => (
-                                <div className="list__item">
+                                <div className="list__item" key={item.id}>
                                     <p className="item__title">{item.type}</p>
                                     <p className="item__money">{item.price}₽</p>
                                     <p className="item__money">{item.email}</p>
                                     <p className="item__money">{item.login}</p>
                                 </div>
                             ))}
-                            {/* <div className="list__item">
-                                <p className="item__title">Название услуги</p>
-                                <p className="item__money">1000 руб.</p>
-                            </div> */}
                         </div>
+                    </div>
+                    <div className="main__review-form">
+                        <h2 className="review-form__title">Оставить отзыв</h2>
+                        <form onSubmit={handleSubmitReview}>
+                            <textarea
+                                className="review-form__textarea"
+                                placeholder="Напишите ваш отзыв..."
+                                value={reviewText}
+                                onChange={(e) => setReviewText(e.target.value)}
+                                maxLength={50}
+                                rows={3}
+                            />
+                            <p className="review-form__counter">{reviewText.length}/50</p>
+                            
+                            <div className="review-form__reactions">
+                                <button
+                                    type="button"
+                                    className={`reaction-btn ${reviewReaction === true ? 'active' : ''}`}
+                                    onClick={() => setReviewReaction(true)}
+                                >
+                                    👍 Рекомендую
+                                </button>
+                                <button
+                                    type="button"
+                                    className={`reaction-btn ${reviewReaction === false ? 'active' : ''}`}
+                                    onClick={() => setReviewReaction(false)}
+                                >
+                                    👎 Не рекомендую
+                                </button>
+                            </div>
+                            
+                            <button
+                                type="submit"
+                                className="review-form__submit"
+                                disabled={submitting}
+                            >
+                                {submitting ? 'Отправка...' : 'Отправить отзыв'}
+                            </button>
+                        </form>
                     </div>
                 </div>
             </main>
