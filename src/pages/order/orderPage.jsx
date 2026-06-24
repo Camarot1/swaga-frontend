@@ -71,7 +71,7 @@ export default function OrderPage() {
 
                 <div className="order-item">
                     <h3>{orderData.title}</h3>
-                    <p>Цена: {orderData.price}₽</p>
+                    <p>Цена: {orderData.price}</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="order-form">
